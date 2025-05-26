@@ -2,29 +2,32 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
+const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const path = require("path");
 const __DIRNAME = path.resolve();
 
-// Middleware
+// Middleware CORS et JSON
 app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(express.json());
-app.get(/(.*)/, (req, res) => {
-  res.sendFile(path.join(__DIRNAME, "front", "dist", "index.html"));
-});
-// Routes
-const postRoutes = require("./routes/post.route");
-app.use("/post", postRoutes); // => routes are /post/ and /post/postNews
 
-app.use(express.static(path.join(__DIRNAME, "/front/dist")));
+// Servir les fichiers statiques en premier
+app.use(express.static(path.join(__DIRNAME, "front", "dist")));
+
+// Routes API
+const postRoutes = require("./routes/post.route");
+app.use("/post", postRoutes);
 
 const routes = require("./routes");
-
 app.use(routes);
 
-// DB connection + server start
+// Catch-all route pour SPA : doit être en dernier
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__DIRNAME, "front", "dist", "index.html"));
+});
+
+// Connexion à MongoDB + démarrage serveur
 mongoose
   .connect(process.env.MONGO_URL)
   .then(() => {
