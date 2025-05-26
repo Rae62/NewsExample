@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { postNews } from "../apis/post.api";
-import { PostContext } from "../context/postContext";
+import { PostContext } from "../context/PostContext";
 import { AuthContext } from "../context/AuthContext";
 
 function NewsForm({ toggleForm }) {
