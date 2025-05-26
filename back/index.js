@@ -12,13 +12,13 @@ const __DIRNAME = path.resolve();
 app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(express.json());
 app.get(/(.*)/, (req, res) => {
-  res.sendFile(path.join(__DIRNAME, "client", "dist", "index.html"));
+  res.sendFile(path.join(__DIRNAME, "front", "dist", "index.html"));
 });
 // Routes
 const postRoutes = require("./routes/post.route");
 app.use("/post", postRoutes); // => routes are /post/ and /post/postNews
 
-app.use(express.static(path.join(__DIRNAME, "/client/dist")));
+app.use(express.static(path.join(__DIRNAME, "/front/dist")));
 
 const routes = require("./routes");
 
