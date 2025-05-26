@@ -1,6 +1,8 @@
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 export const getNews = async () => {
   try {
-    const response = await fetch("http://localhost:3000/post", {
+    const response = await fetch(`${API_URL}/post`, {
       credentials: "include",
     });
 
@@ -16,7 +18,7 @@ export const getNews = async () => {
 
 export const postNews = async ({ title, content, category, author }) => {
   try {
-    const response = await fetch("http://localhost:3000/post/postNews", {
+    const response = await fetch(`${API_URL}/post/postNews`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
