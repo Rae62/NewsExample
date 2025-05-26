@@ -1,10 +1,9 @@
 const API_URL = import.meta.env.VITE_API_URL;
-console.log("API_URL:", API_URL); // <-- Ajoute ça
 
 export const getNews = async () => {
   try {
     const response = await fetch(
-      `VITE_API_URL=https://newsexample.onrender.com
+      `https://newsexample.onrender.com
 /post`,
       {
         credentials: "include",
@@ -24,7 +23,7 @@ export const getNews = async () => {
 export const postNews = async ({ title, content, category, author }) => {
   try {
     const response = await fetch(
-      `VITE_API_URL=https://newsexample.onrender.com
+      `https://newsexample.onrender.com
 /post/postNews`,
       {
         method: "POST",
