@@ -5,14 +5,24 @@ require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const path = require("path");
+const __DIRNAME = path.resolve();
 
 // Middleware
 app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(express.json());
-
+app.get(/(.*)/, (req, res) => {
+  res.sendFile(path.join(__DIRNAME, "client", "dist", "index.html"));
+});
 // Routes
 const postRoutes = require("./routes/post.route");
 app.use("/post", postRoutes); // => routes are /post/ and /post/postNews
+
+app.use(express.static(path.join(__DIRNAME, "/client/dist")));
+
+const routes = require("./routes");
+
+app.use(routes);
 
 // DB connection + server start
 mongoose
