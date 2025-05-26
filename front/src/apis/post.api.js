@@ -3,9 +3,13 @@ console.log("API_URL:", API_URL); // <-- Ajoute ça
 
 export const getNews = async () => {
   try {
-    const response = await fetch(`${API_URL}/post`, {
-      credentials: "include",
-    });
+    const response = await fetch(
+      `VITE_API_URL=https://newsexample.onrender.com
+/post`,
+      {
+        credentials: "include",
+      }
+    );
 
     if (!response.ok) throw new Error("Failed to fetch news");
 
@@ -19,14 +23,18 @@ export const getNews = async () => {
 
 export const postNews = async ({ title, content, category, author }) => {
   try {
-    const response = await fetch(`${API_URL}/post/postNews`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({ title, content, category, author }),
-    });
+    const response = await fetch(
+      `VITE_API_URL=https://newsexample.onrender.com
+/post/postNews`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ title, content, category, author }),
+      }
+    );
 
     if (!response.ok) throw new Error("Failed to post news");
 
