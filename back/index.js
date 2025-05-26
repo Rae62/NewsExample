@@ -15,10 +15,7 @@ app.use(express.json());
 // Servir les fichiers statiques en premier
 app.use(express.static(path.join(__DIRNAME, "front", "dist")));
 
-// Routes API
-const postRoutes = require("./routes/post.route");
-app.use("/post", postRoutes);
-
+// Importe toutes les routes depuis routes/index.js
 const routes = require("./routes");
 app.use(routes);
 
@@ -33,7 +30,11 @@ mongoose
   .then(() => {
     console.log("✅ MongoDB connected");
     app.listen(PORT, () => {
-      console.log(`🚀 Server running on ${process.env.API_URL}`);
+      console.log(
+        `🚀 Server running on ${
+          process.env.API_URL || `http://localhost:${PORT}`
+        }`
+      );
     });
   })
   .catch((err) => {
