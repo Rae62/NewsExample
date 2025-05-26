@@ -20,7 +20,7 @@ const routes = require("./routes");
 app.use(routes);
 
 // Catch-all route pour SPA : doit être en dernier
-app.get("*", (req, res) => {
+app.get(/(.*)/, (req, res) => {
   res.sendFile(path.join(__DIRNAME, "front", "dist", "index.html"));
 });
 
