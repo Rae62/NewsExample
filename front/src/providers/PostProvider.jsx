@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { PostContext } from "../context/postContext";
-import { getNews, postNews } from "../apis/post.api";
+import { PostContext } from "../context/PostContext.js";
+import { getNews } from "../apis/post.api";
 
 export default function PostProvider({ children }) {
   const [news, setNews] = useState([]);
